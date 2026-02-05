@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>🥐パン占い</title>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #faf7f2;
+    }
+
+    .card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
+
+    label {
+      display:block;
+      font-weight: 600;
+      margin: 14px 0 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #111;
+      color: #fff;
+    }
+
+    .hint {
+      color:#666;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff7ea;
+      border: 1px solid #f2d7b2;
+    }
+
+    .bread {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🥐パン占い</h1>
+  <p>あなたをフランスのパンに例えて占います。<br>
+  誕生日は <b>8桁</b>（例：19940714）で入力してください。</p>
+
+  <label for="bday">誕生日（8桁）</label>
+  <input id="bday" inputmode="numeric" placeholder="例：19940714" maxlength="8" />
+
+  <button id="btn">占う🥖</button>
+
+  <div id="out" class="result" style="display:none;"></div>
+
+  <div class="hint">※これは遊びです。</div>
+</div>
+
+<script>
+
+const patterns = [
+  {
+    bread: "クロワッサン",
+    text: "外は軽やか、中は情熱的。柔軟に状況に適応できる人です。",
+    lucky: "ラッキーアクション：カフェに行く"
+  },
+  {
+    bread: "バゲット",
+    text: "芯が強く、真っ直ぐな性格。信頼されるタイプです。",
+    lucky: "ラッキーアクション：朝散歩"
+  },
+  {
+    bread: "ブリオッシュ",
+    text: "周囲を和ませる温かい人柄。甘さと強さを持っています。",
+    lucky: "ラッキーアクション：温かい飲み物"
+  },
+  {
+    bread: "カヌレ",
+    text: "外はクール、中は情熱的。ギャップが魅力です。",
+    lucky: "ラッキーアクション：机を整理する"
+  }
+];
+
+function hashToIndex(str, mod) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return h % mod;
+}
+
+document.getElementById("btn").onclick = () => {
+  const val = document.getElementById("bday").value;
+
+  if (!/^\d{8}$/.test(val)) {
+    alert("8桁の数字で入力してください");
+    return;
+  }
+
+  const index = hashToIndex(val, patterns.length);
+  const result = patterns[index];
+
+  const out = document.getElementById("out");
+  out.style.display = "block";
+
+  out.innerHTML = `
+    <div class="bread">あなたは「${result.bread}」タイプ</div>
+    <div>${result.text}</div>
+    <div style="margin-top:8px;"><b>${result.lucky}</b></div>
+  `;
+};
+
+</script>
+
+</body>
+</html>
