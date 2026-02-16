@@ -3,7 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>🥐パン占い</title>
+  <meta name="description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+
+  <!-- OGP / Twitter Card（SNSサムネ用） -->
+  <!-- ↓↓↓ ここ2か所をあなたのGitHub Pages URLに置換してください ↓↓↓ -->
+  <meta property="og:url" content="https://YOUR-USERNAME.github.io/pan-uranai/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="🥐パン占い" />
+  <meta property="og:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+  <meta property="og:image" content="https://YOUR-USERNAME.github.io/pan-uranai/pan-uranai.webp" />
+  <meta property="og:image:alt" content="パン占いのサムネイル" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🥐パン占い" />
+  <meta name="twitter:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+  <meta name="twitter:image" content="https://YOUR-USERNAME.github.io/pan-uranai/pan-uranai.webp" />
+  <!-- ↑↑↑ 置換ここまで ↑↑↑ -->
 
   <style>
     body {
@@ -74,17 +91,45 @@
     }
 
     .compatibility {
-  margin-top: 14px;
-  padding: 10px;
-  border-radius: 10px;
-  background: #fff;
-  border: 1px dashed #e2c8a6;
-  font-size: 14px;
-}
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px dashed #e2c8a6;
+      font-size: 14px;
+    }
+
     .bread {
       font-size: 20px;
       font-weight: 800;
       margin-bottom: 8px;
+    }
+
+    /* 画像レイアウト */
+    .bread-wrap{
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .bread-img{
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #f2d7b2;
+    }
+
+    @media (max-width: 520px){
+      .bread-wrap{
+        grid-template-columns: 1fr;
+      }
+      .bread-img{
+        width: 100%;
+        height: 220px;
+      }
     }
   </style>
 </head>
@@ -107,108 +152,105 @@
 </div>
 
 <script>
-
 const patterns = [
-
-{
-bread:"クロワッサン",
-text:`私は重層的。軽やかに見えて、準備は抜かないタイプ。
+  {
+    bread:"クロワッサン",
+    img:"croissant.webp",
+    text:`私は重層的。軽やかに見えて、準備は抜かないタイプ。
 空気を読むのもわりと得意。
 バターみたいに、気づけば周りを惹きつけている。
 優雅に見えるが、内側ではかなり計算している。`,
-motto:"相性 ★★★ バゲット・トラディション ／ ☆ パン・オ・ショコラ"
-},
-
-{
-bread:"パン・オ・ショコラ",
-text:`注目を集める人気者。パンの顔をした甘い奴。
+    motto:"相性 ★★★ バゲット・トラディション ／ ☆ パン・オ・ショコラ"
+  },
+  {
+    bread:"パン・オ・ショコラ",
+    img:"pain-au-chocolat.webp",
+    text:`注目を集める人気者。パンの顔をした甘い奴。
 子どもにだいたい最初に選ばれる。
 クロワッサンに僻まれる。呼び方ひとつで嵐を巻き起こす。
 愛されることには、わりと慣れている。`,
-motto:"相性 ★★★ フラン ／ ☆ クロワッサン"
-},
-
-{
-bread:"バゲット・トラディション",
-text:`私は余計なものを足さない。小麦と水と塩、それで十分。
+    motto:"相性 ★★★ フラン ／ ☆ クロワッサン"
+  },
+  {
+    bread:"バゲット・トラディション",
+    img:"baguette.webp",
+    text:`私は余計なものを足さない。小麦と水と塩、それで十分。
 派手じゃないけど、気づけば毎日そばにいる。
 でも、ときどき真顔で冗談を言う。`,
-motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"
-},
-
-{
-bread:"カヌレ",
-text:`大きくない。でも、だいたい思ったより高い。
+    motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"カヌレ",
+    img:"canele.webp",
+    text:`大きくない。でも、だいたい思ったより高い。
 外はカリッ、中はモチッ。親しい人にだけ見せるギャップ萌え。
 ラムの香りは、わりと本気。`,
-motto:"相性 ★★★ パン・オ・レザン ／ ☆ ヌテラ・クレープ"
-},
-
-{
-bread:"クグロフ",
-text:`私は存在感がある。王冠みたいな形。
+    motto:"相性 ★★★ パン・オ・レザン ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"クグロフ",
+    img:"kouglof.webp",
+    text:`私は存在感がある。王冠みたいな形。
 派手に見えて、わりと落ち着いている。
 特別な日は、だいたい私が呼ばれる。`,
-motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ カヌレ"
-},
-
-{
-bread:"ブリオッシュ",
-text:`私は柔らかい。でも、だいたい贅沢に作られている。
+    motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ カヌレ"
+  },
+  {
+    bread:"ブリオッシュ",
+    img:"brioche.webp",
+    text:`私は柔らかい。でも、だいたい贅沢に作られている。
 居心地のよさには、わりとこだわる。
 雑に扱ったら、ただじゃおかないよ。`,
-motto:"相性 ★★★ クロワッサン ／ ☆ バゲット・トラディション"
-},
-
-{
-bread:"パン・オ・レザン",
-text:`私はぐるぐる考えて、わりと哲学的。
+    motto:"相性 ★★★ クロワッサン ／ ☆ バゲット・トラディション"
+  },
+  {
+    bread:"パン・オ・レザン",
+    img:"pain-aux-raisins.webp",
+    text:`私はぐるぐる考えて、わりと哲学的。
 甘い部分も大人っぽい部分も、どっちも持っている。
 物事は単純じゃない方が面白い。`,
-motto:"相性 ★★★ カヌレ ／ ☆ ヌテラ・クレープ"
-},
-
-{
-bread:"ショソン・オ・ポム",
-text:`私は包み込むのが得意。甘さも酸味もちゃんと中に入っている。
+    motto:"相性 ★★★ カヌレ ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"ショソン・オ・ポム",
+    img:"chausson-aux-pommes.webp",
+    text:`私は包み込むのが得意。甘さも酸味もちゃんと中に入っている。
 安心して任せられると言われることが多い。
 最後は必ず満腹にさせる。`,
-motto:"相性 ★★★ クグロフ ／ ☆ クイニーアマン"
-},
-
-{
-bread:"クイニーアマン",
-text:`私は遠慮しない。バターと砂糖の暴力。
+    motto:"相性 ★★★ クグロフ ／ ☆ クイニーアマン"
+  },
+  {
+    bread:"クイニーアマン",
+    img:"kouign-amann.webp",
+    text:`私は遠慮しない。バターと砂糖の暴力。
 罪悪感はある。でも、だいたいもう一口いく。
 中途半端は好きじゃない。`,
-motto:"相性 ★★★ ヌテラ・クレープ ／ ☆ ショソン・オ・ポム"
-},
-
-{
-bread:"フラン",
-text:`私はプルプル。気づけばツルっと完食されている。
+    motto:"相性 ★★★ ヌテラ・クレープ ／ ☆ ショソン・オ・ポム"
+  },
+  {
+    bread:"フラン",
+    img:"flan-patissier.webp",
+    text:`私はプルプル。気づけばツルっと完食されている。
 やさしそうに見えるけど、わりと重量級。
 老若男女に好かれる人たらし。`,
-motto:"相性 ★★★ パン・オ・ショコラ ／ ☆ マドレーヌ"
-},
-
-{
-bread:"ヌテラ・クレープ",
-text:`甘さの暴力で、最後は勝つ。
+    motto:"相性 ★★★ パン・オ・ショコラ ／ ☆ マドレーヌ"
+  },
+  {
+    bread:"ヌテラ・クレープ",
+    img:"nutella-crepe.webp",
+    text:`甘さの暴力で、最後は勝つ。
 正統派だけが正解とは限らない。`,
-motto:"相性 ★★★ クイニーアマン ／ ☆ バゲット・トラディション"
-},
-
-{
-bread:"マドレーヌ",
-text:`私は焼き菓子。パン屋にいるのは、たまたま。
+    motto:"相性 ★★★ クイニーアマン ／ ☆ バゲット・トラディション"
+  },
+  {
+    bread:"マドレーヌ",
+    img:"madeleine.webp",
+    text:`私は焼き菓子。パン屋にいるのは、たまたま。
 小さいけど、育ちはわりといい。
 紹介されるまでもないと思っている。`,
-motto:"相性 ★★★ クロワッサン ／ ☆ ヌテラ・クレープ"
-}
-
+    motto:"相性 ★★★ クロワッサン ／ ☆ ヌテラ・クレープ"
+  }
 ];
-
 
 function hashToIndex(str, mod) {
   let h = 0;
@@ -232,16 +274,19 @@ document.getElementById("btn").onclick = () => {
   const out = document.getElementById("out");
   out.style.display = "block";
 
- out.innerHTML = `
-  <div class="bread">あなたは「${result.bread}」タイプ</div>
-  <div>${result.text}</div>
+  const imgPath = `images/breads/${result.img}`;
 
-  <div class="compatibility">
-    ${result.motto}
-  </div>
-`;
+  out.innerHTML = `
+    <div class="bread-wrap">
+      <img class="bread-img" src="${imgPath}" alt="${result.bread}">
+      <div>
+        <div class="bread">あなたは「${result.bread}」タイプ</div>
+        <div>${result.text}</div>
+        <div class="compatibility">${result.motto}</div>
+      </div>
+    </div>
+  `;
 };
-
 </script>
 
 </body>
