@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>🥐 Horoscope du pain</title>
+  <meta name="description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+
+  <!-- OGP FR -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://payapaya596.github.io/pan-uranai/fr/" />
+  <meta property="og:title" content="🥐 Horoscope du pain" />
+  <meta property="og:description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+  <meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🥐 Horoscope du pain" />
+  <meta name="twitter:description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+  <meta name="twitter:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #faf7f2;
+    }
+    .card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #111;
+      color: #fff;
+    }
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff7ea;
+      border: 1px solid #f2d7b2;
+    }
+    .bread-img{
+      width:160px;
+      height:160px;
+      object-fit:contain;
+      border-radius:12px;
+      margin-bottom:12px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="card">
+  <h1>🥐 Horoscope du pain</h1>
+  <p>Entrez votre date de naissance en 8 chiffres (ex. 19940714).</p>
+
+  <input id="bday" placeholder="19940714" maxlength="8" />
+  <button id="btn">Découvrir</button>
+
+  <div id="out" class="result" style="display:none;"></div>
+</div>
+
+<script>
+const patterns = [
+  { name:"Croissant", img:"croissant.webp", text:"Vous êtes complexe, élégant(e) et stratégique." },
+  { name:"Pain au chocolat", img:"pain-au-chocolat.webp", text:"Populaire, irrésistible et un peu polémique." },
+  { name:"Baguette tradition", img:"baguette.webp", text:"Simple, fiable et indispensable." },
+  { name:"Canelé", img:"canele.webp", text:"Petit mais intense." },
+  { name:"Kouglof", img:"kouglof.webp", text:"Imposant et festif." },
+  { name:"Brioche", img:"brioche.webp", text:"Doux(ce) mais premium." },
+  { name:"Pain aux raisins", img:"pain-aux-raisins.webp", text:"Réfléchi(e) et subtil(e)." },
+  { name:"Chausson aux pommes", img:"chausson-aux-pommes.webp", text:"Réconfortant(e) et généreux(se)." },
+  { name:"Kouign-amann", img:"kouign-amann.webp", text:"Intense et sans compromis." },
+  { name:"Flan pâtissier", img:"flan-patissier.webp", text:"Doux(ce) mais solide." },
+  { name:"Crêpe au Nutella", img:"nutella-crepe.webp", text:"Sucré(e) et victorieux(se)." },
+  { name:"Madeleine", img:"madeleine.webp", text:"Discret(e) mais élégant(e)." }
+];
+
+function hashToIndex(str, mod) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return h % mod;
+}
+
+document.getElementById("btn").onclick = () => {
+  const val = document.getElementById("bday").value;
+  if (!/^\d{8}$/.test(val)) {
+    alert("Veuillez saisir 8 chiffres.");
+    return;
+  }
+
+  const index = hashToIndex(val, patterns.length);
+  const result = patterns[index];
+
+  document.getElementById("out").style.display = "block";
+  document.getElementById("out").innerHTML = `
+    <img class="bread-img" src="../images/breads/${result.img}">
+    <h2>Vous êtes : ${result.name}</h2>
+    <p>${result.text}</p>
+  `;
+};
+</script>
+</body>
+</html>
