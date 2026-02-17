@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>🥐 Horoscope du pain</title>
-  <meta name="description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+  <meta name="description" content="On vous associe à une viennoiserie/pâtisserie française selon votre date de naissance (8 chiffres)." />
 
   <!-- OGP FR -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://payapaya596.github.io/pan-uranai/fr/" />
   <meta property="og:title" content="🥐 Horoscope du pain" />
-  <meta property="og:description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+  <meta property="og:description" content="On vous associe à une viennoiserie/pâtisserie française selon votre date de naissance (8 chiffres)." />
   <meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+  <meta property="og:image:alt" content="Aperçu de l’horoscope du pain" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="🥐 Horoscope du pain" />
-  <meta name="twitter:description" content="On vous associe à une pâtisserie française selon votre date de naissance." />
+  <meta name="twitter:description" content="On vous associe à une viennoiserie/pâtisserie française selon votre date de naissance (8 chiffres)." />
   <meta name="twitter:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
 
   <style>
@@ -26,6 +27,7 @@
       padding: 24px;
       background: #faf7f2;
     }
+
     .card {
       max-width: 720px;
       margin: 0 auto;
@@ -34,7 +36,38 @@
       padding: 20px;
       box-shadow: 0 8px 30px rgba(0,0,0,.06);
     }
-    h1 { margin: 0 0 8px; font-size: 28px; }
+
+    .toplink{
+      text-align: right;
+      margin-top: -6px;
+      margin-bottom: 10px;
+    }
+    .toplink a{
+      text-decoration: none;
+      font-weight: 700;
+      color: #111;
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
+
+    label {
+      display:block;
+      font-weight: 700;
+      margin: 14px 0 6px;
+    }
+
     input {
       width: 100%;
       padding: 12px 14px;
@@ -42,6 +75,7 @@
       border: 1px solid #ddd;
       font-size: 16px;
     }
+
     button {
       margin-top: 14px;
       width: 100%;
@@ -49,11 +83,18 @@
       border-radius: 12px;
       border: 0;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       background: #111;
       color: #fff;
     }
+
+    .hint {
+      color:#666;
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
     .result {
       margin-top: 18px;
       padding: 16px;
@@ -61,12 +102,42 @@
       background: #fff7ea;
       border: 1px solid #f2d7b2;
     }
+
+    .bread {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .compatibility {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px dashed #e2c8a6;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .bread-wrap{
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
     .bread-img{
-      width:160px;
-      height:160px;
-      object-fit:contain;
-      border-radius:12px;
-      margin-bottom:12px;
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #f2d7b2;
+    }
+
+    @media (max-width: 520px){
+      .bread-wrap{ grid-template-columns: 1fr; }
+      .bread-img{ width: 100%; height: 220px; }
     }
   </style>
 </head>
@@ -74,34 +145,133 @@
 <body>
 <div class="card">
   <h1>🥐 Horoscope du pain</h1>
-<p style="text-align:right; margin-top:-8px;">
-  <a href="../" style="text-decoration:none; font-weight:600;">
-    🇯🇵 日本語
-  </a>
-</p>
 
-  <p>Entrez votre date de naissance en 8 chiffres (ex. 19940714).</p>
+  <div class="toplink">
+    <a href="../">🇯🇵 日本語</a>
+  </div>
 
-  <input id="bday" placeholder="19940714" maxlength="8" />
-  <button id="btn">Découvrir</button>
+  <p>
+    On vous associe à une viennoiserie/pâtisserie française.<br>
+    Saisissez votre date de naissance en <b>8 chiffres</b> (ex. : 19940714).
+  </p>
+
+  <label for="bday">Date de naissance (8 chiffres)</label>
+  <input id="bday" inputmode="numeric" placeholder="ex. : 19940714" maxlength="8" />
+
+  <button id="btn">Découvrir 🥖</button>
 
   <div id="out" class="result" style="display:none;"></div>
+  <div class="hint">※ Juste pour s’amuser.</div>
 </div>
 
 <script>
 const patterns = [
-  { name:"Croissant", img:"croissant.webp", text:"Vous êtes complexe, élégant(e) et stratégique." },
-  { name:"Pain au chocolat", img:"pain-au-chocolat.webp", text:"Populaire, irrésistible et un peu polémique." },
-  { name:"Baguette tradition", img:"baguette.webp", text:"Simple, fiable et indispensable." },
-  { name:"Canelé", img:"canele.webp", text:"Petit mais intense." },
-  { name:"Kouglof", img:"kouglof.webp", text:"Imposant et festif." },
-  { name:"Brioche", img:"brioche.webp", text:"Doux(ce) mais premium." },
-  { name:"Pain aux raisins", img:"pain-aux-raisins.webp", text:"Réfléchi(e) et subtil(e)." },
-  { name:"Chausson aux pommes", img:"chausson-aux-pommes.webp", text:"Réconfortant(e) et généreux(se)." },
-  { name:"Kouign-amann", img:"kouign-amann.webp", text:"Intense et sans compromis." },
-  { name:"Flan pâtissier", img:"flan-patissier.webp", text:"Doux(ce) mais solide." },
-  { name:"Crêpe au Nutella", img:"nutella-crepe.webp", text:"Sucré(e) et victorieux(se)." },
-  { name:"Madeleine", img:"madeleine.webp", text:"Discret(e) mais élégant(e)." }
+  {
+    bread: "Croissant",
+    img: "croissant.webp",
+    text: `Vous êtes fait(e) de couches.
+Léger(ère) en apparence, mais jamais pris(e) au dépourvu.
+Vous savez lire l’atmosphère avant même que les autres ne parlent.
+Comme le beurre, vous attirez sans effort.
+Élégant(e) à l’extérieur, stratège à l’intérieur.`,
+    motto: "Compatibilité ★★★ Baguette tradition ／ ☆ Pain au chocolat"
+  },
+  {
+    bread: "Pain au chocolat",
+    img: "pain-au-chocolat.webp",
+    text: `Vous attirez tous les regards.
+Doux(ce) sous ses airs de viennoiserie classique.
+Souvent le premier choix des enfants.
+Le croissant vous jalouse un peu…
+Et votre nom peut déclencher un débat national.
+Vous avez l’habitude qu’on vous aime.`,
+    motto: "Compatibilité ★★★ Flan pâtissier ／ ☆ Croissant"
+  },
+  {
+    bread: "Baguette tradition",
+    img: "baguette.webp",
+    text: `Vous n’ajoutez rien d’inutile.
+Farine, eau, sel. C’est tout.
+Pas spectaculaire, mais indispensable au quotidien.
+On ne vous remarque pas toujours… jusqu’à ce que vous manquiez.
+Et parfois, vous lâchez une blague avec un sérieux imperturbable.`,
+    motto: "Compatibilité ★★★ Chausson aux pommes ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Canelé",
+    img: "canele.webp",
+    text: `Petit, mais souvent plus cher qu’on ne l’imagine.
+Croustillant à l’extérieur, fondant à l’intérieur.
+Votre côté tendre n’apparaît qu’aux proches.
+Et le rhum ? Vous ne plaisantez pas avec ça.`,
+    motto: "Compatibilité ★★★ Pain aux raisins ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Kouglof",
+    img: "kouglof.webp",
+    text: `Vous avez de la présence, avec une silhouette qui évoque une couronne.
+Spectaculaire au premier regard, vous restez pourtant étonnamment posé(e).
+Et lorsque l’occasion devient spéciale, c’est souvent vers vous que l’on se tourne.`,
+    motto: "Compatibilité ★★★ Chausson aux pommes ／ ☆ Canelé"
+  },
+  {
+    bread: "Brioche",
+    img: "brioche.webp",
+    text: `Vous êtes tout en douceur, mais confectionné(e) avec générosité.
+Le confort n’est pas un détail pour vous, c’est une exigence.
+Et si l’on vous traite à la légère, vous ne laissez pas passer.`,
+    motto: "Compatibilité ★★★ Croissant ／ ☆ Baguette tradition"
+  },
+  {
+    bread: "Pain aux raisins",
+    img: "pain-aux-raisins.webp",
+    text: `Vous tournez les idées dans votre tête, avec une pointe de philosophie.
+À la fois doux(ce) et un peu plus adulte qu’il n’y paraît, vous cultivez les contrastes.
+La simplicité vous laisse indifférent(e) ; vous préférez les nuances.`,
+    motto: "Compatibilité ★★★ Canelé ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Chausson aux pommes",
+    img: "chausson-aux-pommes.webp",
+    text: `Vous avez l’art d’envelopper les choses avec douceur.
+Chez vous, le sucré et l’acidulé trouvent naturellement leur équilibre.
+On vous confie les choses importantes sans trop réfléchir.
+Et avec vous, on repart le cœur et l’estomac bien remplis.`,
+    motto: "Compatibilité ★★★ Kouglof ／ ☆ Kouign-amann"
+  },
+  {
+    bread: "Kouign-amann",
+    img: "kouign-amann.webp",
+    text: `Vous ne faites pas dans la demi-mesure.
+Beurre et sucre, sans retenue.
+Un soupçon de culpabilité, peut-être… mais vous reprenez quand même une bouchée.
+Le compromis ? Très peu pour vous.`,
+    motto: "Compatibilité ★★★ Crêpe au Nutella ／ ☆ Chausson aux pommes"
+  },
+  {
+    bread: "Flan pâtissier",
+    img: "flan-patissier.webp",
+    text: `Tout en douceur, vous avez l’air presque innocent(e), et l’on vous imagine léger(ère).
+Pourtant, vous avez bien plus de consistance qu’il n’y paraît.
+On commence sans y penser et, soudain, il ne reste déjà plus rien.
+Vous plaisez aux enfants comme aux adultes, et personne ne s’en plaint.`,
+    motto: "Compatibilité ★★★ Pain au chocolat ／ ☆ Madeleine"
+  },
+  {
+    bread: "Crêpe au Nutella",
+    img: "nutella-crepe.webp",
+    text: `Vous frappez fort, tout en douceur sucrée, et au final, c’est vous qui gagnez.
+La tradition a du charme, bien sûr, mais ce n’est pas toujours elle qui gagne.`,
+    motto: "Compatibilité ★★★ Kouign-amann ／ ☆ Baguette tradition"
+  },
+  {
+    bread: "Madeleine",
+    img: "madeleine.webp",
+    text: `Vous êtes une pâtisserie, plus qu’un simple pain, et si vous vous trouvez chez le boulanger, c’est presque par hasard.
+Petit(e), certes, mais avec une certaine distinction.
+Vous n’avez pas besoin d’en faire trop pour exister.`,
+    motto: "Compatibilité ★★★ Croissant ／ ☆ Crêpe au Nutella"
+  }
 ];
 
 function hashToIndex(str, mod) {
@@ -114,19 +284,29 @@ function hashToIndex(str, mod) {
 
 document.getElementById("btn").onclick = () => {
   const val = document.getElementById("bday").value;
+
   if (!/^\d{8}$/.test(val)) {
-    alert("Veuillez saisir 8 chiffres.");
+    alert("Veuillez saisir 8 chiffres (ex. 19940714).");
     return;
   }
 
   const index = hashToIndex(val, patterns.length);
   const result = patterns[index];
 
-  document.getElementById("out").style.display = "block";
-  document.getElementById("out").innerHTML = `
-    <img class="bread-img" src="../images/breads/${result.img}">
-    <h2>Vous êtes : ${result.name}</h2>
-    <p>${result.text}</p>
+  const out = document.getElementById("out");
+  out.style.display = "block";
+
+  const imgPath = `../images/breads/${result.img}`;
+
+  out.innerHTML = `
+    <div class="bread-wrap">
+      <img class="bread-img" src="${imgPath}" alt="${result.bread}">
+      <div>
+        <div class="bread">Vous êtes « ${result.bread} »</div>
+        <div>${result.text.replaceAll("\n", "<br>")}</div>
+        <div class="compatibility">${result.motto}</div>
+      </div>
+    </div>
   `;
 };
 </script>
