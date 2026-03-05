@@ -22,7 +22,7 @@
   <meta name="twitter:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
 
   <style>
-    *{ box-sizing:border-box; } /* はみ出し防止 */
+    *{ box-sizing:border-box; }
 
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
@@ -38,6 +38,30 @@
       border-radius: 16px;
       padding: 20px;
       box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
+
+    .toplink{
+      text-align:right;
+      margin-top:-6px;
+      margin-bottom:10px;
+    }
+    .toplink a{
+      text-decoration:none;
+      font-weight:700;
+      color:#111;
+      border:1px solid #ddd;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#fff;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .flag{
+      width:18px;
+      height:12px;
+      display:inline-block;
     }
 
     h1 {
@@ -100,7 +124,6 @@
       margin-bottom: 8px;
     }
 
-    /* 画像レイアウト */
     .bread-wrap{
       display: grid;
       grid-template-columns: 160px 1fr;
@@ -117,21 +140,9 @@
       border: 1px solid #f2d7b2;
     }
 
-    .flag{
-      width:18px;
-      height:12px;
-      vertical-align:-2px;
-      margin-right:6px;
-    }
-
     @media (max-width: 520px){
-      .bread-wrap{
-        grid-template-columns: 1fr;
-      }
-      .bread-img{
-        width: 100%;
-        height: 220px;
-      }
+      .bread-wrap{ grid-template-columns: 1fr; }
+      .bread-img{ width: 100%; height: 220px; }
     }
   </style>
 </head>
@@ -139,14 +150,15 @@
 <body>
 
 <div class="card">
-  <p style="text-align:right; margin-top:-8px;">
-    <a href="fr/" style="text-decoration:none; font-weight:600;">
+
+  <h1>🥐パン占い🥖</h1>
+
+  <div class="toplink">
+    <a href="fr/">
       <img src="images/flags/flag-fr.svg" class="flag" alt="">
       Français
     </a>
-  </p>
-
-  <h1>🥐パン占い🥖</h1>
+  </div>
 
   <p>あなたをフランスのパンに例えて占います。<br>
   誕生日は <b>8桁</b>（例：19940714）で入力してください。</p>
@@ -290,7 +302,7 @@ document.getElementById("btn").onclick = () => {
       <img class="bread-img" src="${imgPath}" alt="${result.bread}">
       <div>
         <div class="bread">あなたは「${result.bread}」タイプ</div>
-        <div>${result.text}</div>
+        <div>${result.text.replaceAll("\n","<br>")}</div>
         <div class="compatibility">${result.motto}</div>
       </div>
     </div>
