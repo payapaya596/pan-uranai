@@ -5,10 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>🥐 Quel pain êtes-vous ? 🥖</title>
+<meta name="description" content="À quel pain français ressemblez-vous ? Entrez votre date de naissance pour le découvrir.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://payapaya596.github.io/pan-uranai/fr/">
+<meta property="og:title" content="🥐 Quel pain êtes-vous ? 🥖">
+<meta property="og:description" content="À quel pain français ressemblez-vous ? Entrez votre date de naissance pour le découvrir.">
+<meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp">
+
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
 
-*{box-sizing:border-box;}
+*{
+box-sizing:border-box;
+}
 
 body{
 font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -26,6 +37,22 @@ padding:20px;
 box-shadow:0 8px 30px rgba(0,0,0,.06);
 }
 
+h1{
+margin:0 0 8px;
+font-size:28px;
+}
+
+p{
+margin:0 0 16px;
+line-height:1.6;
+}
+
+label{
+display:block;
+font-weight:600;
+margin:14px 0 6px;
+}
+
 input{
 width:100%;
 padding:12px 14px;
@@ -37,13 +64,53 @@ font-size:16px;
 button{
 margin-top:14px;
 width:100%;
-padding:12px;
+padding:12px 14px;
 border-radius:12px;
 border:0;
+font-size:16px;
 font-weight:700;
+cursor:pointer;
 background:#111;
 color:#fff;
-cursor:pointer;
+}
+
+.result{
+margin-top:18px;
+padding:16px;
+border-radius:14px;
+background:#fff7ea;
+border:1px solid #f2d7b2;
+}
+
+.compatibility{
+margin-top:14px;
+padding:10px;
+border-radius:10px;
+background:#fff;
+border:1px dashed #e2c8a6;
+font-size:14px;
+}
+
+.bread{
+font-size:20px;
+font-weight:800;
+margin-bottom:8px;
+}
+
+.bread-wrap{
+display:grid;
+grid-template-columns:160px 1fr;
+gap:14px;
+align-items:start;
+}
+
+.bread-img{
+width:160px;
+height:160px;
+object-fit:contain;
+border-radius:14px;
+background:#fff;
+border:1px solid #f2d7b2;
 }
 
 .flag{
@@ -51,6 +118,11 @@ width:18px;
 height:12px;
 vertical-align:-2px;
 margin-right:6px;
+}
+
+@media(max-width:520px){
+.bread-wrap{grid-template-columns:1fr;}
+.bread-img{width:100%;height:220px;}
 }
 
 </style>
@@ -62,7 +134,7 @@ margin-right:6px;
 
 <p style="text-align:right;">
 <a href="../" style="text-decoration:none;font-weight:600;">
-<img src="../images/flags/flag-ja.svg" class="flag" alt="日本語">
+<img src="../images/flags/flag-ja.svg" class="flag" alt="">
 日本語
 </a>
 </p>
@@ -70,15 +142,81 @@ margin-right:6px;
 <h1>🥐 Quel pain êtes-vous ? 🥖</h1>
 
 <p>
-Entrez votre date de naissance (8 chiffres).<br>
-Exemple : <b>19940714</b>
+À quel pain français ressemblez-vous ?<br>
+Entrez votre date de naissance en <b>8 chiffres</b> (exemple : 19940714).
 </p>
 
-<input placeholder="19940714" maxlength="8">
+<label for="bday">Date de naissance (8 chiffres)</label>
+<input id="bday" inputmode="numeric" placeholder="ex : 19940714" maxlength="8">
 
-<button>Voir mon pain</button>
+<button id="btn">Voir mon pain 🥖</button>
+
+<div id="out" class="result" style="display:none;"></div>
 
 </div>
+
+<script>
+
+const patterns=[
+{
+bread:"Croissant",
+img:"croissant.webp",
+text:"Vous êtes élégant et plein de finesse. Léger en apparence, mais très structuré à l’intérieur.",
+motto:"Compatibilité ★★★ Baguette / ☆ Pain au chocolat"
+},
+{
+bread:"Pain au chocolat",
+img:"pain-au-chocolat.webp",
+text:"Vous êtes populaire et irrésistible. Tout le monde vous choisit en premier.",
+motto:"Compatibilité ★★★ Flan / ☆ Croissant"
+},
+{
+bread:"Baguette",
+img:"baguette.webp",
+text:"Simple et authentique. Vous êtes un classique indispensable.",
+motto:"Compatibilité ★★★ Chausson aux pommes / ☆ Crêpe au Nutella"
+}
+];
+
+function hashToIndex(str,mod){
+let h=0;
+for(let i=0;i<str.length;i++){
+h=(h*31+str.charCodeAt(i))>>>0;
+}
+return h%mod;
+}
+
+document.getElementById("btn").onclick=()=>{
+
+const val=document.getElementById("bday").value;
+
+if(!/^\d{8}$/.test(val)){
+alert("Veuillez entrer 8 chiffres");
+return;
+}
+
+const index=hashToIndex(val,patterns.length);
+const result=patterns[index];
+
+const out=document.getElementById("out");
+out.style.display="block";
+
+const imgPath=`../images/breads/${result.img}`;
+
+out.innerHTML=`
+<div class="bread-wrap">
+<img class="bread-img" src="${imgPath}">
+<div>
+<div class="bread">Vous êtes du type « ${result.bread} »</div>
+<div>${result.text}</div>
+<div class="compatibility">${result.motto}</div>
+</div>
+</div>
+`;
+
+};
+
+</script>
 
 </body>
 </html>
