@@ -1,221 +1,301 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>🥐パン占い🥖</title>
-<meta name="description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。">
+  <title>🥐パン占い🥖</title>
+  <meta name="description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://payapaya596.github.io/pan-uranai/">
-<meta property="og:title" content="🥐パン占い🥖">
-<meta property="og:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。">
-<meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp">
+  <!-- OGP -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://payapaya596.github.io/pan-uranai/" />
+  <meta property="og:title" content="🥐パン占い🥖" />
+  <meta property="og:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+  <meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+  <meta property="og:image:alt" content="パン占いのサムネイル" />
 
-<meta name="twitter:card" content="summary_large_image">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🥐パン占い🥖" />
+  <meta name="twitter:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+  <meta name="twitter:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
 
-<style>
+  <style>
+    *{ box-sizing:border-box; } /* はみ出し防止 */
 
-*{
-box-sizing:border-box;
-}
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #faf7f2;
+    }
 
-body{
-font-family: system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;
-margin:0;
-padding:24px;
-background:#faf7f2;
-}
+    .card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
 
-.card{
-max-width:720px;
-margin:0 auto;
-background:#fff;
-border-radius:16px;
-padding:20px;
-box-shadow:0 8px 30px rgba(0,0,0,.06);
-}
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
 
-h1{
-margin:0 0 8px;
-font-size:28px;
-}
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
 
-p{
-margin:0 0 16px;
-line-height:1.6;
-}
+    label {
+      display:block;
+      font-weight: 600;
+      margin: 14px 0 6px;
+    }
 
-label{
-display:block;
-font-weight:600;
-margin:14px 0 6px;
-}
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
 
-input{
-width:100%;
-padding:12px 14px;
-border-radius:12px;
-border:1px solid #ddd;
-font-size:16px;
-}
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #111;
+      color: #fff;
+    }
 
-button{
-margin-top:14px;
-width:100%;
-padding:12px 14px;
-border-radius:12px;
-border:0;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
-background:#111;
-color:#fff;
-}
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff7ea;
+      border: 1px solid #f2d7b2;
+    }
 
-.result{
-margin-top:18px;
-padding:16px;
-border-radius:14px;
-background:#fff7ea;
-border:1px solid #f2d7b2;
-}
+    .compatibility {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px dashed #e2c8a6;
+      font-size: 14px;
+    }
 
-.compatibility{
-margin-top:14px;
-padding:10px;
-border-radius:10px;
-background:#fff;
-border:1px dashed #e2c8a6;
-font-size:14px;
-}
+    .bread {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
 
-.bread{
-font-size:20px;
-font-weight:800;
-margin-bottom:8px;
-}
+    /* 画像レイアウト */
+    .bread-wrap{
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
 
-.bread-wrap{
-display:grid;
-grid-template-columns:160px 1fr;
-gap:14px;
-align-items:start;
-}
+    .bread-img{
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #f2d7b2;
+    }
 
-.bread-img{
-width:160px;
-height:160px;
-object-fit:contain;
-border-radius:14px;
-background:#fff;
-border:1px solid #f2d7b2;
-}
+    .flag{
+      width:18px;
+      height:12px;
+      vertical-align:-2px;
+      margin-right:6px;
+    }
 
-.flag{
-width:18px;
-height:12px;
-vertical-align:-2px;
-margin-right:6px;
-}
-
-@media(max-width:520px){
-.bread-wrap{grid-template-columns:1fr;}
-.bread-img{width:100%;height:220px;}
-}
-
-</style>
+    @media (max-width: 520px){
+      .bread-wrap{
+        grid-template-columns: 1fr;
+      }
+      .bread-img{
+        width: 100%;
+        height: 220px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="card">
+  <p style="text-align:right; margin-top:-8px;">
+    <a href="fr/" style="text-decoration:none; font-weight:600;">
+      <img src="images/flags/flag-fr.svg" class="flag" alt="">
+      Français
+    </a>
+  </p>
 
-<p style="text-align:right;">
-<a href="fr/" style="text-decoration:none;font-weight:600;">
-<img src="images/flags/flag-fr.svg" class="flag" alt="Français">
-Français
-</a>
-</p>
+  <h1>🥐パン占い🥖</h1>
 
-<h1>🥐パン占い🥖</h1>
+  <p>あなたをフランスのパンに例えて占います。<br>
+  誕生日は <b>8桁</b>（例：19940714）で入力してください。</p>
 
-<p>
-あなたをフランスのパンに例えて占います。<br>
-誕生日は <b>8桁</b>（例：19940714）で入力してください。
-</p>
+  <label for="bday">誕生日（8桁）</label>
+  <input id="bday" inputmode="numeric" placeholder="例：19940714" maxlength="8" />
 
-<label for="bday">誕生日（8桁）</label>
-<input id="bday" inputmode="numeric" placeholder="例：19940714" maxlength="8">
+  <button id="btn">占う🥖</button>
 
-<button id="btn">占う🥖</button>
-
-<div id="out" class="result" style="display:none;"></div>
+  <div id="out" class="result" style="display:none;"></div>
 
 </div>
 
 <script>
-
-const patterns=[
-{
-bread:"クロワッサン",
-img:"croissant.webp",
-text:"私は重層的。軽やかに見えて準備は抜かないタイプ。",
-motto:"相性 ★★★ バゲット ／ ☆ パン・オ・ショコラ"
-},
-{
-bread:"パン・オ・ショコラ",
-img:"pain-au-chocolat.webp",
-text:"注目を集める人気者。甘くて人気のパン。",
-motto:"相性 ★★★ フラン ／ ☆ クロワッサン"
-},
-{
-bread:"バゲット",
-img:"baguette.webp",
-text:"シンプルが一番。毎日の定番。",
-motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"
-}
+const patterns = [
+  {
+    bread:"クロワッサン",
+    img:"croissant.webp",
+    text:`私は重層的。軽やかに見えて、準備は抜かないタイプ。
+空気を読むのもわりと得意。
+バターみたいに、気づけば周りを惹きつけている。
+優雅に見えるが、内側ではかなり計算している。`,
+    motto:"相性 ★★★ バゲット・トラディション ／ ☆ パン・オ・ショコラ"
+  },
+  {
+    bread:"パン・オ・ショコラ",
+    img:"pain-au-chocolat.webp",
+    text:`注目を集める人気者。パンの顔をした甘い奴。
+子どもにだいたい最初に選ばれる。
+クロワッサンに僻まれる。呼び方ひとつで嵐を巻き起こす。
+愛されることには、わりと慣れている。`,
+    motto:"相性 ★★★ フラン ／ ☆ クロワッサン"
+  },
+  {
+    bread:"バゲット・トラディション",
+    img:"baguette.webp",
+    text:`私は余計なものを足さない。小麦と水と塩、それで十分。
+派手じゃないけど、気づけば毎日そばにいる。
+でも、ときどき真顔で冗談を言う。`,
+    motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"カヌレ",
+    img:"canele.webp",
+    text:`大きくない。でも、だいたい思ったより高い。
+外はカリッ、中はモチッ。親しい人にだけ見せるギャップ萌え。
+ラムの香りは、わりと本気。`,
+    motto:"相性 ★★★ パン・オ・レザン ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"クグロフ",
+    img:"kouglof.webp",
+    text:`私は存在感がある。王冠みたいな形。
+派手に見えて、わりと落ち着いている。
+特別な日は、だいたい私が呼ばれる。`,
+    motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ カヌレ"
+  },
+  {
+    bread:"ブリオッシュ",
+    img:"brioche.webp",
+    text:`私は柔らかい。でも、だいたい贅沢に作られている。
+居心地のよさには、わりとこだわる。
+雑に扱ったら、ただじゃおかないよ。`,
+    motto:"相性 ★★★ クロワッサン ／ ☆ バゲット・トラディション"
+  },
+  {
+    bread:"パン・オ・レザン",
+    img:"pain-aux-raisins.webp",
+    text:`私はぐるぐる考えて、わりと哲学的。
+甘い部分も大人っぽい部分も、どっちも持っている。
+物事は単純じゃない方が面白い。`,
+    motto:"相性 ★★★ カヌレ ／ ☆ ヌテラ・クレープ"
+  },
+  {
+    bread:"ショソン・オ・ポム",
+    img:"chausson-aux-pommes.webp",
+    text:`私は包み込むのが得意。甘さも酸味もちゃんと中に入っている。
+安心して任せられると言われることが多い。
+最後は必ず満腹にさせる。`,
+    motto:"相性 ★★★ クグロフ ／ ☆ クイニーアマン"
+  },
+  {
+    bread:"クイニーアマン",
+    img:"kouign-amann.webp",
+    text:`私は遠慮しない。バターと砂糖の暴力。
+罪悪感はある。でも、だいたいもう一口いく。
+中途半端は好きじゃない。`,
+    motto:"相性 ★★★ ヌテラ・クレープ ／ ☆ ショソン・オ・ポム"
+  },
+  {
+    bread:"フラン",
+    img:"flan-patissier.webp",
+    text:`私はプルプル。気づけばツルっと完食されている。
+やさしそうに見えるけど、わりと重量級。
+老若男女に好かれる人たらし。`,
+    motto:"相性 ★★★ パン・オ・ショコラ ／ ☆ マドレーヌ"
+  },
+  {
+    bread:"ヌテラ・クレープ",
+    img:"nutella-crepe.webp",
+    text:`甘さの暴力で、最後は勝つ。
+正統派だけが正解とは限らない。`,
+    motto:"相性 ★★★ クイニーアマン ／ ☆ バゲット・トラディション"
+  },
+  {
+    bread:"マドレーヌ",
+    img:"madeleine.webp",
+    text:`私は焼き菓子。パン屋にいるのは、たまたま。
+小さいけど、育ちはわりといい。
+紹介されるまでもないと思っている。`,
+    motto:"相性 ★★★ クロワッサン ／ ☆ ヌテラ・クレープ"
+  }
 ];
 
-function hashToIndex(str,mod){
-let h=0;
-for(let i=0;i<str.length;i++){
-h=(h*31+str.charCodeAt(i))>>>0;
-}
-return h%mod;
-}
-
-document.getElementById("btn").onclick=()=>{
-
-const val=document.getElementById("bday").value;
-
-if(!/^\d{8}$/.test(val)){
-alert("8桁の数字で入力してください");
-return;
+function hashToIndex(str, mod) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return h % mod;
 }
 
-const index=hashToIndex(val,patterns.length);
-const result=patterns[index];
+document.getElementById("btn").onclick = () => {
+  const val = document.getElementById("bday").value;
 
-const out=document.getElementById("out");
-out.style.display="block";
+  if (!/^\d{8}$/.test(val)) {
+    alert("8桁の数字で入力してください");
+    return;
+  }
 
-const imgPath=`images/breads/${result.img}`;
+  const index = hashToIndex(val, patterns.length);
+  const result = patterns[index];
 
-out.innerHTML=`
-<div class="bread-wrap">
-<img class="bread-img" src="${imgPath}">
-<div>
-<div class="bread">あなたは「${result.bread}」タイプ</div>
-<div>${result.text}</div>
-<div class="compatibility">${result.motto}</div>
-</div>
-</div>
-`;
+  const out = document.getElementById("out");
+  out.style.display = "block";
 
+  const imgPath = `images/breads/${result.img}`;
+
+  out.innerHTML = `
+    <div class="bread-wrap">
+      <img class="bread-img" src="${imgPath}" alt="${result.bread}">
+      <div>
+        <div class="bread">あなたは「${result.bread}」タイプ</div>
+        <div>${result.text}</div>
+        <div class="compatibility">${result.motto}</div>
+      </div>
+    </div>
+  `;
 };
-
 </script>
 
 </body>
