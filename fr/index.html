@@ -1,222 +1,323 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>🥐 Quel pain êtes-vous ? 🥖</title>
-<meta name="description" content="À quel pain français ressemblez-vous ? Entrez votre date de naissance pour le découvrir.">
+  <title>🥐 Quel pain êtes-vous ? 🥖</title>
+  <meta name="description" content="Découvrez quel pain/pâtisserie française vous ressemble. Date de naissance en 8 chiffres (ex. 19940714)." />
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://payapaya596.github.io/pan-uranai/fr/">
-<meta property="og:title" content="🥐 Quel pain êtes-vous ? 🥖">
-<meta property="og:description" content="À quel pain français ressemblez-vous ? Entrez votre date de naissance pour le découvrir.">
-<meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp">
+  <!-- OGP FR -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://payapaya596.github.io/pan-uranai/fr/" />
+  <meta property="og:title" content="🥐 Quel pain êtes-vous ? 🥖" />
+  <meta property="og:description" content="Découvrez quel pain/pâtisserie française vous ressemble. Date de naissance en 8 chiffres (ex. 19940714)." />
+  <meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+  <meta property="og:image:alt" content="Aperçu du test « Quel pain êtes-vous ? »" />
 
-<meta name="twitter:card" content="summary_large_image">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="🥐 Quel pain êtes-vous ? 🥖" />
+  <meta name="twitter:description" content="Découvrez quel pain/pâtisserie française vous ressemble. Date de naissance en 8 chiffres (ex. 19940714)." />
+  <meta name="twitter:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
 
-<style>
+  <style>
+    * { box-sizing: border-box; }
 
-*{
-box-sizing:border-box;
-}
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #faf7f2;
+    }
 
-body{
-font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-margin:0;
-padding:24px;
-background:#faf7f2;
-}
+    .card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.06);
+    }
 
-.card{
-max-width:720px;
-margin:0 auto;
-background:#fff;
-border-radius:16px;
-padding:20px;
-box-shadow:0 8px 30px rgba(0,0,0,.06);
-}
+    .toplink{
+      text-align: right;
+      margin-top: -6px;
+      margin-bottom: 10px;
+    }
+    .toplink a{
+      text-decoration: none;
+      font-weight: 700;
+      color: #111;
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-h1{
-margin:0 0 8px;
-font-size:28px;
-}
+    .flag{
+      width: 18px;
+      height: 12px;
+      display: inline-block;
+    }
 
-p{
-margin:0 0 16px;
-line-height:1.6;
-}
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
 
-label{
-display:block;
-font-weight:600;
-margin:14px 0 6px;
-}
+    p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
 
-input{
-width:100%;
-padding:12px 14px;
-border-radius:12px;
-border:1px solid #ddd;
-font-size:16px;
-}
+    label {
+      display:block;
+      font-weight: 700;
+      margin: 14px 0 6px;
+    }
 
-button{
-margin-top:14px;
-width:100%;
-padding:12px 14px;
-border-radius:12px;
-border:0;
-font-size:16px;
-font-weight:700;
-cursor:pointer;
-background:#111;
-color:#fff;
-}
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
 
-.result{
-margin-top:18px;
-padding:16px;
-border-radius:14px;
-background:#fff7ea;
-border:1px solid #f2d7b2;
-}
+    button {
+      margin-top: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 0;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      background: #111;
+      color: #fff;
+    }
 
-.compatibility{
-margin-top:14px;
-padding:10px;
-border-radius:10px;
-background:#fff;
-border:1px dashed #e2c8a6;
-font-size:14px;
-}
+    .result {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #fff7ea;
+      border: 1px solid #f2d7b2;
+    }
 
-.bread{
-font-size:20px;
-font-weight:800;
-margin-bottom:8px;
-}
+    .bread {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
 
-.bread-wrap{
-display:grid;
-grid-template-columns:160px 1fr;
-gap:14px;
-align-items:start;
-}
+    .compatibility {
+      margin-top: 14px;
+      padding: 10px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px dashed #e2c8a6;
+      font-size: 14px;
+      font-weight: 700;
+    }
 
-.bread-img{
-width:160px;
-height:160px;
-object-fit:contain;
-border-radius:14px;
-background:#fff;
-border:1px solid #f2d7b2;
-}
+    .bread-wrap{
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
 
-.flag{
-width:18px;
-height:12px;
-vertical-align:-2px;
-margin-right:6px;
-}
+    .bread-img{
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #f2d7b2;
+    }
 
-@media(max-width:520px){
-.bread-wrap{grid-template-columns:1fr;}
-.bread-img{width:100%;height:220px;}
-}
-
-</style>
+    @media (max-width: 520px){
+      .bread-wrap{ grid-template-columns: 1fr; }
+      .bread-img{ width: 100%; height: 220px; }
+    }
+  </style>
 </head>
 
 <body>
-
 <div class="card">
+  <h1>🥐 Quel pain êtes-vous ? 🥖</h1>
 
-<p style="text-align:right;">
-<a href="../" style="text-decoration:none;font-weight:600;">
-<img src="../images/flags/flag-ja.svg" class="flag" alt="">
-日本語
-</a>
-</p>
+  <div class="toplink">
+    <a href="../">
+      <img class="flag" src="../images/flags/flag-ja.svg" alt="">
+      日本語
+    </a>
+  </div>
 
-<h1>🥐 Quel pain êtes-vous ? 🥖</h1>
+  <p>
+    Découvrez quel pain/pâtisserie française vous ressemble.<br>
+    Saisissez votre date de naissance en <b>8 chiffres</b> (ex. : 19940714).
+  </p>
 
-<p>
-À quel pain français ressemblez-vous ?<br>
-Entrez votre date de naissance en <b>8 chiffres</b> (exemple : 19940714).
-</p>
+  <label for="bday">Date de naissance (8 chiffres)</label>
+  <input id="bday" inputmode="numeric" placeholder="ex. : 19940714" maxlength="8" />
 
-<label for="bday">Date de naissance (8 chiffres)</label>
-<input id="bday" inputmode="numeric" placeholder="ex : 19940714" maxlength="8">
+  <button id="btn">Lancer le test 🥖</button>
 
-<button id="btn">Voir mon pain 🥖</button>
-
-<div id="out" class="result" style="display:none;"></div>
+  <div id="out" class="result" style="display:none;"></div>
 
 </div>
 
 <script>
-
-const patterns=[
-{
-bread:"Croissant",
-img:"croissant.webp",
-text:"Vous êtes élégant et plein de finesse. Léger en apparence, mais très structuré à l’intérieur.",
-motto:"Compatibilité ★★★ Baguette / ☆ Pain au chocolat"
-},
-{
-bread:"Pain au chocolat",
-img:"pain-au-chocolat.webp",
-text:"Vous êtes populaire et irrésistible. Tout le monde vous choisit en premier.",
-motto:"Compatibilité ★★★ Flan / ☆ Croissant"
-},
-{
-bread:"Baguette",
-img:"baguette.webp",
-text:"Simple et authentique. Vous êtes un classique indispensable.",
-motto:"Compatibilité ★★★ Chausson aux pommes / ☆ Crêpe au Nutella"
-}
+const patterns = [
+  {
+    bread: "Croissant",
+    img: "croissant.webp",
+    text: `Vous êtes fait(e) de couches.
+Léger(ère) en apparence, mais jamais pris(e) au dépourvu.
+Vous savez lire l’atmosphère avant même que les autres ne parlent.
+Comme le beurre, vous attirez sans effort.
+Élégant(e) à l’extérieur, stratège à l’intérieur.`,
+    motto: "Compatibilité ★★★ Baguette tradition ／ ☆ Pain au chocolat"
+  },
+  {
+    bread: "Pain au chocolat",
+    img: "pain-au-chocolat.webp",
+    text: `Vous attirez tous les regards.
+Doux(ce) sous ses airs de viennoiserie classique.
+Souvent le premier choix des enfants.
+Le croissant vous jalouse un peu…
+Et votre nom peut déclencher un débat national.
+Vous avez l’habitude qu’on vous aime.`,
+    motto: "Compatibilité ★★★ Flan pâtissier ／ ☆ Croissant"
+  },
+  {
+    bread: "Baguette tradition",
+    img: "baguette.webp",
+    text: `Vous n’ajoutez rien d’inutile.
+Farine, eau, sel. C’est tout.
+Pas spectaculaire, mais indispensable au quotidien.
+On ne vous remarque pas toujours… jusqu’à ce que vous manquiez.
+Et parfois, vous lâchez une blague avec un sérieux imperturbable.`,
+    motto: "Compatibilité ★★★ Chausson aux pommes ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Canelé",
+    img: "canele.webp",
+    text: `Petit, mais souvent plus cher qu’on ne l’imagine.
+Croustillant à l’extérieur, fondant à l’intérieur.
+Votre côté tendre n’apparaît qu’aux proches.
+Et le rhum ? Vous ne plaisantez pas avec ça.`,
+    motto: "Compatibilité ★★★ Pain aux raisins ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Kouglof",
+    img: "kouglof.webp",
+    text: `Vous avez de la présence, avec une silhouette qui évoque une couronne.
+Spectaculaire au premier regard, vous restez pourtant étonnamment posé(e).
+Et lorsque l’occasion devient spéciale, c’est souvent vers vous que l’on se tourne.`,
+    motto: "Compatibilité ★★★ Chausson aux pommes ／ ☆ Canelé"
+  },
+  {
+    bread: "Brioche",
+    img: "brioche.webp",
+    text: `Vous êtes tout en douceur, mais confectionné(e) avec générosité.
+Le confort n’est pas un détail pour vous, c’est une exigence.
+Et si l’on vous traite à la légère, vous ne laissez pas passer.`,
+    motto: "Compatibilité ★★★ Croissant ／ ☆ Baguette tradition"
+  },
+  {
+    bread: "Pain aux raisins",
+    img: "pain-aux-raisins.webp",
+    text: `Vous tournez les idées dans votre tête, avec une pointe de philosophie.
+À la fois doux(ce) et un peu plus adulte qu’il n’y paraît, vous cultivez les contrastes.
+La simplicité vous laisse indifférent(e) ; vous préférez les nuances.`,
+    motto: "Compatibilité ★★★ Canelé ／ ☆ Crêpe au Nutella"
+  },
+  {
+    bread: "Chausson aux pommes",
+    img: "chausson-aux-pommes.webp",
+    text: `Vous avez l’art d’envelopper les choses avec douceur.
+Chez vous, le sucré et l’acidulé trouvent naturellement leur équilibre.
+On vous confie les choses importantes sans trop réfléchir.
+Et avec vous, on repart le cœur et l’estomac bien remplis.`,
+    motto: "Compatibilité ★★★ Kouglof ／ ☆ Kouign-amann"
+  },
+  {
+    bread: "Kouign-amann",
+    img: "kouign-amann.webp",
+    text: `Vous ne faites pas dans la demi-mesure.
+Beurre et sucre, sans retenue.
+Un soupçon de culpabilité, peut-être… mais vous reprenez quand même une bouchée.
+Le compromis ? Très peu pour vous.`,
+    motto: "Compatibilité ★★★ Crêpe au Nutella ／ ☆ Chausson aux pommes"
+  },
+  {
+    bread: "Flan pâtissier",
+    img: "flan-patissier.webp",
+    text: `Tout en douceur, vous avez l’air presque innocent(e), et l’on vous imagine léger(ère).
+Pourtant, vous avez bien plus de consistance qu’il n’y paraît.
+On commence sans y penser et, soudain, il ne reste déjà plus rien.
+Vous plaisez aux enfants comme aux adultes, et personne ne s’en plaint.`,
+    motto: "Compatibilité ★★★ Pain au chocolat ／ ☆ Madeleine"
+  },
+  {
+    bread: "Crêpe au Nutella",
+    img: "nutella-crepe.webp",
+    text: `Vous frappez fort, tout en douceur sucrée, et au final, c’est vous qui gagnez.
+La tradition a du charme, bien sûr, mais ce n’est pas toujours elle qui gagne.`,
+    motto: "Compatibilité ★★★ Kouign-amann ／ ☆ Baguette tradition"
+  },
+  {
+    bread: "Madeleine",
+    img: "madeleine.webp",
+    text: `Vous êtes une pâtisserie, plus qu’un simple pain, et si vous vous trouvez chez le boulanger, c’est presque par hasard.
+Petit(e), certes, mais avec une certaine distinction.
+Vous n’avez pas besoin d’en faire trop pour exister.`,
+    motto: "Compatibilité ★★★ Croissant ／ ☆ Crêpe au Nutella"
+  }
 ];
 
-function hashToIndex(str,mod){
-let h=0;
-for(let i=0;i<str.length;i++){
-h=(h*31+str.charCodeAt(i))>>>0;
-}
-return h%mod;
-}
-
-document.getElementById("btn").onclick=()=>{
-
-const val=document.getElementById("bday").value;
-
-if(!/^\d{8}$/.test(val)){
-alert("Veuillez entrer 8 chiffres");
-return;
+function hashToIndex(str, mod) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return h % mod;
 }
 
-const index=hashToIndex(val,patterns.length);
-const result=patterns[index];
+document.getElementById("btn").onclick = () => {
+  const val = document.getElementById("bday").value;
 
-const out=document.getElementById("out");
-out.style.display="block";
+  if (!/^\d{8}$/.test(val)) {
+    alert("Veuillez saisir 8 chiffres (ex. 19940714).");
+    return;
+  }
 
-const imgPath=`../images/breads/${result.img}`;
+  const index = hashToIndex(val, patterns.length);
+  const result = patterns[index];
 
-out.innerHTML=`
-<div class="bread-wrap">
-<img class="bread-img" src="${imgPath}">
-<div>
-<div class="bread">Vous êtes du type « ${result.bread} »</div>
-<div>${result.text}</div>
-<div class="compatibility">${result.motto}</div>
-</div>
-</div>
-`;
+  const out = document.getElementById("out");
+  out.style.display = "block";
 
+  const imgPath = `../images/breads/${result.img}`;
+
+  out.innerHTML = `
+    <div class="bread-wrap">
+      <img class="bread-img" src="${imgPath}" alt="${result.bread}">
+      <div>
+        <div class="bread">Vous êtes « ${result.bread} »</div>
+        <div>${result.text.replaceAll("\n", "<br>")}</div>
+        <div class="compatibility">${result.motto}</div>
+      </div>
+    </div>
+  `;
 };
-
 </script>
-
 </body>
 </html>
