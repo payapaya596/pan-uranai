@@ -1,15 +1,17 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>🥐 Quel pain êtes-vous ?🥖 </title>
-<meta name="description" content="Quel pain français êtes-vous ? Entrez votre date de naissance pour le découvrir." />
+<title>🥐 Quel pain êtes-vous ? 🥖</title>
 
 <style>
+
+*{box-sizing:border-box;}
+
 body{
-font-family: system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans",sans-serif;
+font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
 margin:0;
 padding:24px;
 background:#faf7f2;
@@ -23,10 +25,6 @@ border-radius:16px;
 padding:20px;
 box-shadow:0 8px 30px rgba(0,0,0,.06);
 }
-
-h1{margin:0 0 8px;font-size:28px;}
-
-p{margin:0 0 16px;line-height:1.6;}
 
 input{
 width:100%;
@@ -54,6 +52,7 @@ height:12px;
 vertical-align:-2px;
 margin-right:6px;
 }
+
 </style>
 </head>
 
@@ -62,8 +61,8 @@ margin-right:6px;
 <div class="card">
 
 <p style="text-align:right;">
-<a href="../">
-<img src="../images/flags/flag-ja.svg" class="flag" alt="">
+<a href="../" style="text-decoration:none;font-weight:600;">
+<img src="../images/flags/flag-ja.svg" class="flag" alt="日本語">
 日本語
 </a>
 </p>
@@ -75,11 +74,9 @@ Entrez votre date de naissance (8 chiffres).<br>
 Exemple : <b>19940714</b>
 </p>
 
-<input id="bday" placeholder="19940714" maxlength="8">
+<input placeholder="19940714" maxlength="8">
 
-<button id="btn">Voir mon pain</button>
-
-<div id="out"></div>
+<button>Voir mon pain</button>
 
 </div>
 
