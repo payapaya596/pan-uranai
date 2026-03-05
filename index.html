@@ -1,21 +1,26 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>🥐パン占い🥖</title>
-<meta name="description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
+<meta name="description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。">
 
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://payapaya596.github.io/pan-uranai/" />
-<meta property="og:title" content="🥐パン占い🥖" />
-<meta property="og:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。" />
-<meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp" />
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://payapaya596.github.io/pan-uranai/">
+<meta property="og:title" content="🥐パン占い🥖">
+<meta property="og:description" content="あなたをフランスのパンに例えて占います。誕生日8桁でサクッと診断。">
+<meta property="og:image" content="https://payapaya596.github.io/pan-uranai/images/breads/pan-uranai.webp">
 
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary_large_image">
 
 <style>
+
+*{
+box-sizing:border-box;
+}
+
 body{
 font-family: system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans JP",sans-serif;
 margin:0;
@@ -119,6 +124,7 @@ margin-right:6px;
 .bread-wrap{grid-template-columns:1fr;}
 .bread-img{width:100%;height:220px;}
 }
+
 </style>
 </head>
 
@@ -127,13 +133,13 @@ margin-right:6px;
 <div class="card">
 
 <p style="text-align:right;">
-<a href="fr/">
-<img src="images/flags/flag-fr.svg" class="flag" alt="">
+<a href="fr/" style="text-decoration:none;font-weight:600;">
+<img src="images/flags/flag-fr.svg" class="flag" alt="Français">
 Français
 </a>
 </p>
 
-<h1>🥐パン占い</h1>
+<h1>🥐パン占い🥖</h1>
 
 <p>
 あなたをフランスのパンに例えて占います。<br>
@@ -152,9 +158,24 @@ Français
 <script>
 
 const patterns=[
-{bread:"クロワッサン",img:"croissant.webp",text:"私は重層的。軽やかに見えて、準備は抜かないタイプ。空気を読むのもわりと得意。バターみたいに、気づけば周りを惹きつけている。優雅に見えるが、内側ではかなり計算している。",motto:"相性 ★★★ バゲット・トラディション ／ ☆ パン・オ・ショコラ"},
-{bread:"パン・オ・ショコラ",img:"pain-au-chocolat.webp",text:"注目を集める人気者。パンの顔をした甘い奴。子どもにだいたい最初に選ばれる。クロワッサンに僻まれる。呼び方ひとつで嵐を巻き起こす。愛されることには、わりと慣れている。",motto:"相性 ★★★ フラン ／ ☆ クロワッサン"},
-{bread:"バゲット・トラディション",img:"baguette.webp",text:"私は余計なものを足さない。小麦と水と塩、それで十分。派手じゃないけど、気づけば毎日そばにいる。でも、ときどき真顔で冗談を言う。",motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"}
+{
+bread:"クロワッサン",
+img:"croissant.webp",
+text:"私は重層的。軽やかに見えて準備は抜かないタイプ。",
+motto:"相性 ★★★ バゲット ／ ☆ パン・オ・ショコラ"
+},
+{
+bread:"パン・オ・ショコラ",
+img:"pain-au-chocolat.webp",
+text:"注目を集める人気者。甘くて人気のパン。",
+motto:"相性 ★★★ フラン ／ ☆ クロワッサン"
+},
+{
+bread:"バゲット",
+img:"baguette.webp",
+text:"シンプルが一番。毎日の定番。",
+motto:"相性 ★★★ ショソン・オ・ポム ／ ☆ ヌテラ・クレープ"
+}
 ];
 
 function hashToIndex(str,mod){
@@ -166,6 +187,7 @@ return h%mod;
 }
 
 document.getElementById("btn").onclick=()=>{
+
 const val=document.getElementById("bday").value;
 
 if(!/^\d{8}$/.test(val)){
@@ -191,6 +213,7 @@ out.innerHTML=`
 </div>
 </div>
 `;
+
 };
 
 </script>
